@@ -1,0 +1,101 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage[nottoc]{tocbibind}
+\usepackage{parskip}
+\usepackage{amsthm}
+\usepackage{hyperref}
+
+\title{CMSC351: Prerequisite}
+\author{Johning To}
+\date{5/23/2023}
+
+\renewcommand{\contentsname}{}
+
+\begin{document}
+\maketitle
+
+\tableofcontents
+\clearpage
+
+\section{Symbols}
+\begin{enumerate}
+  \item For all ($ \forall $)
+  \item There exists ($ \exists $)
+\end{enumerate}
+
+\clearpage
+
+\section{Proofs}
+\subsection {Weak Induction}
+First, we need to prove $ \forall n \ge n_0 $ $ P(n) $ we first prove $ P(n_0) $ (which is the base case) and
+then we prove $ \forall k \ge n_0 \; P(k) \rightarrow P(k+1) $ (which is the inductive step) (you can also prove $ P(k - 1) $).
+The assumption of $ P(k) $ in the inductive step is the inductive hypothesis.
+
+Ultimately, for the inductive step we are trying to find that for any $ k \ge n_0 $ if $ P(k) $ is true, then $ P(k + 1) $ is also true. 
+
+\textbf{Example:}
+Suppose we have a set of nested Russian dolls (Matryoshka dolls). Each doll is contained with another doll, each doll is labeled 1, 2, 3 and so on. 
+
+In this hypothetical, there are two things that are true. Let's say $ M(n) $ is true iff (if and only if) doll $ n $ has another doll contained.
+
+(a) The first doll has another doll contained. That is, $ M(n) $ is true.
+
+(b) For every doll k, if doll k has another doll inside then doll $ k + 1 $ has another doll inside.
+$$ \forall k \ge 1, M(k) \rightarrow M(k + 1) $$
+
+We can now conclude that $ \forall n \ge 1, M(n) $.
+
+\subsection {Strong Induction}
+The goal of strong induction is we need to find some property, we can say $ P(n) $ and 
+we need to find some n greater than equal to a ($ n \ge a $).
+
+How can we accomplish this?
+
+\textbf {Step 1 (Basis step):} We are going to prove for $ P(a) $ (we would just prove $ P(a) $ for weak induction), $ P(a + 1) $, ...,
+for some finite number say $ P(b) $. 
+
+($P(a),\; P(a + b),\;...,\;P(b)$) $ \leftarrow $ we prove each of these.
+
+\textbf {Step 2 (Induction):} We can now assume $ P(i) $ where $ a \le i \le k $. (Assume $ P(i) $).
+Then, we prove $ P(k + 1) $.
+
+\textbf {Example: Fibonacci Sequence}
+\begin{proof}
+Claim: 
+The Fibonacci Sequence is defined as the following: $ F(0) = 0, F(1) = 1 $ and for $ n \ge 2, F(n) = F(n - 1) + F(n - 2). $
+We want to prove that for all $ n \ge 0 , F(n) \le 2^n $
+
+Base cases:
+
+For $ n = 0: F(0) = 0 \le 2^0 = 1 $
+
+For $ n = 1: F(1) = 1 \le 2^1 = 1 $
+
+For both these base case, they hold true. 
+
+Inductive Step: 
+Assume that for all $ i $, $ 0 \le i \le k $, we have $ F(k) \le 2 ^ k $.
+
+(This could also be known as the inductive hypothesis)
+
+We now need to prove $ F(k + 1) \le 2 ^ {k + 1} $.
+
+By the inductive hypothesis, we have $ F(n) \le 2^n $ and $ F(n - 1) \le 2^{n-1} $.
+
+We can prove by which:
+\begin{center}
+  $\begin{aligned}
+    F(k+1) & = F(k) + F(k-1)
+    \\
+    & \le 2^{k-1} + 2^{k-2} & \text{(IH)}
+    \\
+    & \le 2^{k-1} + 2^{k-1} & \text{($ 2^{k-2} $ is less than $ 2^{k-1} $)}
+    \\
+    & = 2^k & \text{(Simplify)} 
+  \end{aligned}$
+\end{center}
+\end{proof}
+
+\end{document}
