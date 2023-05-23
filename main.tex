@@ -1,7 +1,12 @@
 \documentclass{article}
 \usepackage[utf8]{inputenc}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.8, width=10cm}
+\usepackage{amsmath}
+\usepackage{amssymb}
 
-\title {CMSC351: Big Notation}
+
+\title{CMSC351: Big Notation}
 \author{Johning To}
 \date{5/22/2023}
 
@@ -9,6 +14,17 @@
 \maketitle
 
 \section{The Big-O Notation}
-Definition: 
-\end{document}
 
+\textbf {Definition:}
+For Big O, we say
+$$ f(x) = O(g(x)) \text { if } \exists x_0, C > 0 \; \text {such that} \; \forall x \ge x_0, f(x) \le Cg(x) $$
+Essentially, we need to find some $ C $ where $ g(x) $ is greater than $ f(x) $ at some $ x_0 $.
+Example: 
+
+\text {Notice that }
+\\ \\
+\textbf {Definition:}
+For Big $ \Omega $, we say
+$$ f(x) = \Omega(g(x)) \text { if } \exists x_0, B > 0 \; \text {such that} \; \forall x \ge x_0, f(x) \ge B(g(x)) $$
+
+\end{document}
