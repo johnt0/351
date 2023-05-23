@@ -6,6 +6,9 @@
 \usepackage{parskip}
 \usepackage{amsthm}
 \usepackage{hyperref}
+\usepackage{enumitem}
+\usepackage{tikz}
+\usetikzlibrary{graphs}
 
 \title{CMSC351: Prerequisite}
 \author{Johning To}
@@ -23,6 +26,11 @@
 \begin{enumerate}
   \item For all ($ \forall $)
   \item There exists ($ \exists $)
+  \item Element in set ($ \in $)
+  \item Greater than ($ > $)
+  \item Less than ($ < $)
+  \item Greater than equal ($ \ge $)
+  \item Less than equal ($ \le $)
 \end{enumerate}
 
 \clearpage
@@ -39,10 +47,11 @@ Ultimately, for the inductive step we are trying to find that for any $ k \ge n_
 Suppose we have a set of nested Russian dolls (Matryoshka dolls). Each doll is contained with another doll, each doll is labeled 1, 2, 3 and so on. 
 
 In this hypothetical, there are two things that are true. Let's say $ M(n) $ is true iff (if and only if) doll $ n $ has another doll contained.
+\begin{enumerate}[label=(\alph*)]
+\item The first doll has another doll contained. That is, $ M(n) $ is true.
 
-(a) The first doll has another doll contained. That is, $ M(n) $ is true.
-
-(b) For every doll k, if doll k has another doll inside then doll $ k + 1 $ has another doll inside.
+\item For every doll k, if doll k has another doll inside then doll $ k + 1 $ has another doll inside.
+\end{enumerate}
 $$ \forall k \ge 1, M(k) \rightarrow M(k + 1) $$
 
 We can now conclude that $ \forall n \ge 1, M(n) $.
@@ -117,7 +126,7 @@ So, we need:
   an^3 + (b-3a)n^2 + (3a-2b+c)n + (d-a+b-c) = an^3 + bn^2 + cn + d \\  
   an^3 + (b-3a+1)n^2 + (3a-2b+c)n+(d-a+b-c) = an^3 + bn^2 + cn + d
 \end{alignat*}
-We arrive at a systems of equations
+We arrive at a systems of equations:
 \begin{alignat*}{2}
   b-3a+1 = b \\
   3a-2b+c = c \\
@@ -131,4 +140,120 @@ Therefore,
 \end{alignat*}
 
 \subsection{Structural Induction}
+To prove some property, $ P(x) $ holds for all $ x $ in recursively defined set $ R $.
+\begin{itemize}
+  \item $ P(b) $ for each base case $ b \in R $
+  \item $ P(c(x)) $ for each constructor, $ c $, assuming inductive hypothesis $ P(x) $.
+\end{itemize}
+
+Suppose $ S $ is a recursively defined set
+
+To prove a statement of the form:
+\begin{alignat*}{1}
+\forall s \in S. \; P(s)
+\end{alignat*}
+
+\begin{itemize}
+  \item Base Case: Show $ P $ holds for each element defined to be in $ S $ as a base case.
+  \item Inductive Step: For each recursive rule used to build $ S $, show that \underline{if} $ P $ holds for 
+  things already in S, \underline{then} $ P $ also holds for things already in $ S $, then $ P $ also holds for 
+  the new elemnts constructed by the rules.
+\end{itemize}
+
+\textbf{Example:}
+Let $ t \in B $ be a binary tree.
+
+We define a binary tree as the following:
+\begin{itemize}
+  \item A single node is a binary tree.
+  \item If $B_1$ and $B_2$ are binary trees then a single node as parent $B_1$ and $B_2$ is also a binary tree.
+\end{itemize}
+Let $ e(t) = $ the number of empty trees
+contained in $ t $.
+\begin{center}
+  \begin{tikzpicture}[
+    every node/.style={circle, draw},
+    level/.style={sibling distance=30mm/#1}
+  ]
+    \node {a}
+      child {node {b}
+        child {node {d}}
+          child {node {}}
+      }
+      child {node {}
+      };
+  \end{tikzpicture}
+\end{center}
+
+From this graph, $ e(t) = 4 $ and $ b(t) = 3 $
+
+\textbf{Theroem:} For all $ t \in B $, $ e(t) = 1 + b(t) $
+
+We can prove this by structural induction!
+
+\begin{proof}
+By structural induction.
+
+\underline{\textbf{Base Case:}}
+
+The number of empty trees in an empty tree is 1. \checkmark
+
+The number of binary trees in an empty tree is 0. \checkmark
+
+\underline{\textbf{Inductive Step:}}
+
+Let $ t_1 $, $ t_2 $ $ \in B $ and suppose $ e(t_1) = 1 + b(t_1) $ and $ e(t_2) = 1 + b(t_2) $.
+
+Then, 
+\begin{alignat*}{2}
+e( 
+\begin{tikzpicture}[
+  every node/.style={circle, draw},
+  level/.style={sibling distance=30mm/#1}
+]
+  \node {}
+    child {node {$t_1$}
+  }
+    child {node {$t_2$}
+  };
+\end{tikzpicture}
+) &=& e(t_1) + e(t_2)
+\\
+1 + b( \begin{tikzpicture}[
+  every node/.style={circle, draw},
+  level/.style={sibling distance=30mm/#1}
+]
+  \node {}
+    child {node {$t_1$}
+  }
+    child {node {$t_2$}
+  };
+\end{tikzpicture}
+)
+&=& 1 + (1 + b(t_1) + b(t_2))
+\\
+&=& 2 + (b(t_1) + b(t_2))
+\\
+e(t_1) + e(t_2) &=& (1 + b(t_1)) + (1 + b(t_2)) 
+\end{alignat*}
+\end{proof}
+\clearpage
+
+\section{Combinatorics}
+\subsection{Permutations and Combinations}
+\textbf{Formulas:}
+
+\begin{alignat*}{2}
+  n\;\text{objects, permutate} \;k = \frac{n!}{(n-k)!} \\
+  n\;\text{objects, choose}\; k = \frac{n!}{k!{(n-k)}!} \\
+  n\;\text{categories, permutate} \;k = n^k 
+\end{alignat*}
+
+\subsection{Probability and Expected Value}
+Suppose X is a random variable that represents the different outcomes $ x_1, ..., x_n $ with respective
+probabilities $p_1, ..., p_n$ then the expected value of X is:
+
+\begin{center}
+  $E(X) = p_1x_1 + ... + p_nx_n $
+\end{center}
 \end{document}
