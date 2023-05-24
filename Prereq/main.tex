@@ -299,4 +299,37 @@ We can solve each one of these separately now.
   - \frac{1}{2} = \left[\frac{\frac{1}{2}^{n+1} - 1}{\frac{1}{2}-1}\right] - \frac{1}{2} \\
   \sum_{i=2}^n i^2 &= \frac{n(n+1)(2n+1)}{6} - 1
 \end{alignat*}
+The results of the sum of those:
+
+\begin{alignat*}{2}
+  2\left[\frac{n(n+1)}{2} - 1\right] + \left[\frac{\frac{1}{2}^{n+1} - 1}{\frac{1}{2} -1}\right] - \frac{1}{2} + \left[\frac{n(n+1)(2n+1)}{6}\right] - 1
+\end{alignat*}
+
+\subsection{L'hopital Rule}
+Things to remeber:
+
+\textbf{Theorem.} Suppose we are trying to evaluate:
+
+\begin{center}
+  \[\lim_{x\to\infty}\frac{f(x)}{g(x)}\]
+\end{center}
+\begin{itemize}
+  \item If $\lim_{x\to\infty} f(x)\ = \lim_{x\to\infty} g(x) = 0 $ then:
+  \begin{center}
+    \[\lim_{x\to\infty}\frac{f(x)}{g(x)} = \lim_{x\to\infty}\frac{f'(x)}{g'(x)} \]
+
+  \end{center}
+  \item If $\lim_{x\to\infty} f(x)\ = \lim_{x\to\infty} g(x) = \infty $ then:
+  \begin{center}
+    \[\lim_{x\to\infty}\frac{f(x)}{g(x)} = \lim_{x\to\infty}\frac{f'(x)}{g'(x)} \]
+    
+  \end{center}
+\end{itemize}
+\subsection{Manipulation of Logs}
+\begin{alignat*}{2}
+  log_b a &= \frac{log_c a}{log_c b} \;\text{(base changes)}\\
+  log_b (xy) &= log_b x + log_b y\\
+  log_b (\frac{x}{y}) &= log_b{x} - log_b{y}\\
+  log_b (x^p) &= p log_b x \\
+\end{alignat*}
 \end{document}
