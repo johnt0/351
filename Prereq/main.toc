@@ -7,3 +7,5 @@
 \contentsline {section}{\numberline {3}Combinatorics}{7}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Permutations and Combinations}{7}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}Probability and Expected Value}{7}{subsection.3.2}%
+\contentsline {section}{\numberline {4}Calculus}{8}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Sequences and Sums}{8}{subsection.4.1}%
